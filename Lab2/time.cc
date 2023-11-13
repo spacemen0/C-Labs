@@ -1,5 +1,19 @@
 #include "time.hpp"
 
+// TODO: Complementary work needed: to_string should add leading zeroes if
+// needed. The format is HH:MM:SS, not H:M:S.
+//
+// TODO: Complementary work needed: Do not repeat similar code 
+//
+// TODO: Complementary work needed: You should only have to implement a maximum of
+// two of the comparison operators which should be used to implement the other ones.
+//
+// TODO: Complementary work needed: If your operator>> doesn't work how they
+// usually do, it needs to be documented in the header. Usually, it only reads
+// the stream until an error occurs.
+//
+// TODO: Complementary work needed: The operator>> should not print anything.
+//
 bool Time::is_am() const
 {
         return (*this < Time{ 12,0,0 });
