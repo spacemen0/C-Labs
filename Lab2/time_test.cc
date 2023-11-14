@@ -14,28 +14,28 @@ TEST_CASE("is_valid")
 {
 	Time a{11, 11, 11};
 	Time b{11, 66, 1};
-	CHECK(a.is_valid());
-	CHECK_FALSE(b.is_valid());
+	CHECK(is_valid(a));
+	CHECK_FALSE(is_valid(b));
 }
 
 TEST_CASE("to_string")
 {
 	Time a{13, 11, 11};
-	CHECK(a.to_string() == "13:11:11");
-	CHECK(a.to_string(false) == "1:11:11[pm]");
+	CHECK(to_string(a) == "13:11:11");
+	CHECK(to_string(a, false) == "01:11:11[pm]");
 }
 TEST_CASE("io")
 {
-	std::istringstream iss{"random- dsadas dsa"};
-	std::istringstream isss{"12:12:12"};
+	std::istringstream invalid{"random- dsadas dsa"};
+	std::istringstream valid{"12:12:12"};
 	std::ostringstream oss{};
 	Time a{};
-	iss >> a;
-	CHECK(iss.fail());
-	CHECK(a.to_string() == "0:0:0");
-	isss >> a;
-	CHECK(a.to_string() == "12:12:12");
-	oss << a << endl;
+	invalid >> a;
+	CHECK(invalid.fail());
+	CHECK(to_string(a) == "00:00:00");
+	valid >> a;
+	CHECK(to_string(a) == "12:12:12");
+	oss << a << std::endl;
 	CHECK(oss.str() == "12:12:12\n");
 }
 
@@ -43,5 +43,7 @@ TEST_CASE("addition")
 {
 	Time a{12, 58, 59};
 	Time b{a + 1};
-	CHECK(b.to_string() == "12:59:0");
+	Time c{a - (86400 * 3)};
+	CHECK(to_string(b) == "12:59:00");
+	CHECK(to_string(c) == "12:58:59");
 }

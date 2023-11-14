@@ -1,81 +1,45 @@
 #include "time.hpp"
 
-// TODO: Complementary work needed: to_string should add leading zeroes if
-// needed. The format is HH:MM:SS, not H:M:S.
-//
-// TODO: Complementary work needed: Do not repeat similar code 
-//
-// TODO: Complementary work needed: You should only have to implement a maximum of
-// two of the comparison operators which should be used to implement the other ones.
-//
-// TODO: Complementary work needed: If your operator>> doesn't work how they
-// usually do, it needs to be documented in the header. Usually, it only reads
-// the stream until an error occurs.
-//
-// TODO: Complementary work needed: The operator>> should not print anything.
-//
-bool Time::is_am() const
+bool is_am(const Time &time)
 {
-        return (*this < Time{ 12,0,0 });
-    
+    return (time < Time{12, 0, 0});
 }
 
-bool Time::is_valid() const
+bool is_valid(const Time &time)
 {
-    return (this->hours >= 0 && this->hours < 24) &&
-        (this->minutes >= 0 && this->minutes < 60) &&
-        (this->seconds >= 0 && this->seconds < 60);
+    return (time.hours >= 0 && time.hours < 24) &&
+           (time.minutes >= 0 && time.minutes < 60) &&
+           (time.seconds >= 0 && time.seconds < 60);
+}
+bool operator<(const Time &lhs, const Time &rhs)
+{
+    return lhs.hours < rhs.hours || (lhs.hours == rhs.hours && lhs.minutes < rhs.minutes) || (lhs.hours == rhs.hours && lhs.minutes == rhs.minutes && lhs.seconds < rhs.seconds);
+}
+bool operator>(const Time &lhs, const Time &rhs)
+{
+    return !(lhs < rhs) && !(lhs == rhs);
+}
+bool operator==(const Time &lhs, const Time &rhs)
+{
+    return lhs.hours == rhs.hours && lhs.minutes == rhs.minutes && lhs.seconds == rhs.seconds;
 }
 
-bool Time::operator==(const Time& other) const
+bool operator!=(const Time &lhs, const Time &rhs)
 {
-    return this->hours == other.hours && this->minutes == other.minutes && this->seconds == other.seconds;
+    return !(lhs == rhs);
 }
 
-bool Time::operator!=(const Time& other) const
+bool operator>=(const Time &lhs, const Time &rhs)
 {
-    return !(*this == other);
+    return lhs > rhs || lhs == rhs;
 }
-
-bool Time::operator>(const Time& other) const
+bool operator<=(const Time &lhs, const Time &rhs)
 {
-        if (!(this->hours == other.hours))
-        {
-            return this->hours > other.hours;
-        }
-        if (!(this->minutes == other.minutes))
-        {
-            return this->minutes > other.minutes;
-        }
-        return this->seconds > other.seconds;
+    return lhs < rhs || lhs == rhs;
 }
-
-bool Time::operator<(const Time& other) const
+Time operator+(const Time &time, int seconds)
 {
-    if (!(this->hours == other.hours))
-    {
-        return this->hours < other.hours;
-    }
-    if (!(this->minutes == other.minutes))
-    {
-        return this->minutes < other.minutes;
-    }
-    return this->seconds < other.seconds;
-}
-
-bool Time::operator>=(const Time& other) const
-{
-    return (*this > other) || (*this == other);
-}
-
-bool Time::operator<=(const Time& other) const
-{
-    return (*this < other) || (*this == other);
-}
-
-Time Time::operator+(int seconds) const
-{
-    Time result{ this->hours,this->minutes,this->seconds };
+    Time result{time.hours, time.minutes, time.seconds};
     result.seconds += seconds;
     result.minutes += result.seconds / 60;
     result.seconds %= 60;
@@ -85,10 +49,9 @@ Time Time::operator+(int seconds) const
 
     return result;
 }
-
-Time Time::operator-(int seconds) const
+Time operator-(const Time &time, int seconds)
 {
-    Time result{ this->hours,this->minutes,this->seconds };
+    Time result{time.hours, time.minutes, time.seconds};
     result.seconds -= seconds;
     if (result.seconds < 0)
     {
@@ -104,144 +67,78 @@ Time Time::operator-(int seconds) const
         result.minutes += borrowHours * 60;
     }
 
-    if (result.hours < 0)
+    while (result.hours < 0)
     {
         result.hours += 24;
     }
 
     return result;
 }
-
-Time& Time::operator++() //pre
+Time &operator++(Time &time)
 {
-    this->seconds += 1;
-    this->minutes += this->seconds / 60;
-    this->seconds %= 60;
-    this->hours += this->minutes / 60;
-    this->minutes %= 60;
-    this->hours %= 24;
-    return *this;
+    time = time + 1;
+    return time;
 }
-
-const Time Time::operator++(int) //post
+Time operator++(Time &time, int)
 {
-    Time result{ this->hours,this->minutes,this->seconds };
-    this->seconds += 1;
-    this->minutes += this->seconds / 60;
-    this->seconds %= 60;
-    this->hours += this->minutes / 60;
-    this->minutes %= 60;
-    this->hours %= 24;
+    Time result{time.hours, time.minutes, time.seconds};
+    time = time + 1;
     return result;
 }
-
-Time& Time::operator--()
+Time &operator--(Time &time)
 {
-    this->seconds -= 1;
-    if (this->seconds < 0)
-    {
-        int borrowMinutes = (-this->seconds + 59) / 60;
-        this->minutes -= borrowMinutes;
-        this->seconds += borrowMinutes * 60;
-    }
-
-    if (this->minutes < 0)
-    {
-        int borrowHours = (-this->minutes + 59) / 60;
-        this->hours -= borrowHours;
-        this->minutes += borrowHours * 60;
-    }
-
-    if (this->hours < 0)
-    {
-        this->hours += 24;
-    }
-
-    return *this;
-
+    time = time - 1;
+    return time;
 }
-
-const Time Time::operator--(int)
+Time operator--(Time &time, int)
 {
-    Time result{ this->hours,this->minutes,this->seconds };
-    this->seconds -= 1;
-    if (this->seconds < 0)
-    {
-        int borrowMinutes = (-this->seconds + 59) / 60;
-        this->minutes -= borrowMinutes;
-        this->seconds += borrowMinutes * 60;
-    }
-
-    if (this->minutes < 0)
-    {
-        int borrowHours = (-this->minutes + 59) / 60;
-        this->hours -= borrowHours;
-        this->minutes += borrowHours * 60;
-    }
-
-    if (this->hours < 0)
-    {
-        this->hours += 24;
-    }
-
+    Time result{time.hours, time.minutes, time.seconds};
+    time = time - 1;
     return result;
 }
-
-string Time::to_string(bool is_24) const
+std::string to_string(const Time &time, bool is_24)
 {
-    if (!is_valid()) {
-        //cout << "Invalid time input!" << endl;
-        cerr << "Invalid time input!";
-        return "";
+    std::ostringstream oss;
+    if (is_24)
+    {
+        oss << std::setfill('0') << std::setw(2) << time.hours << ":" << std::setw(2) << time.minutes << ":" << std::setw(2) << time.seconds;
     }
-    if (is_24 == true) {
-        return std::to_string(this->hours) + ":" + std::to_string(this->minutes) + ":" + std::to_string(this->seconds);
-    }
-    else if (is_24 == false) {
-        if (is_am()) {
-            return std::to_string(this->hours) + ":" + std::to_string(this->minutes) + ":" + std::to_string(this->seconds) + "[am]";
+    else
+    {
+        int hours12 = time.hours % 12;
+        if (hours12 == 0)
+        {
+            hours12 = 12;
         }
-        else if (this->hours == 12) {
-            return std::to_string(this->hours) + ":" + std::to_string(this->minutes) + ":" + std::to_string(this->seconds) + "[pm]";
+
+        oss << std::setfill('0') << std::setw(2) << hours12 << ":" << std::setw(2) << time.minutes << ":" << std::setw(2) << time.seconds;
+
+        if (is_am(time))
+        {
+            oss << "[am]";
         }
-        else {
-            return std::to_string(this->hours - 12) + ":" + std::to_string(this->minutes) + ":" + std::to_string(this->seconds) + "[pm]";
+        else
+        {
+            oss << "[pm]";
         }
     }
-    else {
-        cerr << "invalid format input";
-        return "";
-    }
+    return oss.str();
 }
 
-ostream& operator<<(ostream& os, const Time& time)
+std::ostream &operator<<(std::ostream &os, const Time &time)
 {
-    os << time.to_string();
+    os << to_string(time);
     return os;
 }
-
-istream& operator>>(istream& is, Time& time)
+std::istream &operator>>(std::istream &is, Time &time)
 {
     char colon1, colon2;
-    Time inputTime;
-    is.clear();
-    // Attempt to read hours, minutes, and seconds from input stream
-    is >> inputTime.hours >> colon1 >> inputTime.minutes >> colon2 >> inputTime.seconds;
+    is >> std::setw(2) >> time.hours >> colon1 >> std::setw(2) >> time.minutes >> colon2 >> std::setw(2) >> time.seconds;
 
-    // Check if the read values are within valid range
-    if (is && colon1 == ':' && colon2 == ':' &&
-        inputTime.is_valid()) {
-        // Values are valid, update the Time object
-        time.hours = inputTime.hours;
-        time.minutes = inputTime.minutes;
-        time.seconds = inputTime.seconds;
+    if (colon1 != ':' || colon2 != ':' || !is_valid(time))
+    {
+        is.setstate(std::ios::failbit);
     }
-    else {
-        // Set the fail flag if input is incorrect
-        is.setstate(ios::failbit);
-    }
-    if (is.fail()) {
-        cout << "input is incorrect!" << endl;
-    }
+
     return is;
 }
