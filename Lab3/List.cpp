@@ -100,6 +100,24 @@ void List::print()
     cout << endl;
 }
 
+List::Node* List::getHead()
+{
+    Node* temp = head->next;
+    return temp;
+}
+void List::print(Node* temp)
+{
+    if (temp != nullptr) {
+        cout << temp->value << " ";
+        print(temp->next);
+    }
+    else {
+        cout << endl;
+        return;
+    }
+        
+}
+
 void List::clear() {
 	while (head != nullptr)
 	{
