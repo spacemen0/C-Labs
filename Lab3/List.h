@@ -28,6 +28,8 @@ public:
 	int at(int index);
 	std::string to_string();
 	void print();
+        void print(Node* temp);// recursive print
+        Node* getHead();
 	void clear();
 private:
 	Node* head{};
