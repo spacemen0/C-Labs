@@ -82,41 +82,28 @@ std::string List::to_string()
 {
     string str;
     Node* temp = head->next;
-    while (temp->next != nullptr) {
-        str+= std::to_string(temp->value) +" ";
-        temp = temp->next;
-    }
-    str += std::to_string(temp->value);
-    return str;
+    return to_string(temp);
 }
 
-void List::print()
+std::string List::to_string(Node* temp)
 {
-    Node* temp = head->next;
-    while (temp != nullptr) {
-        cout << temp->value << " ";
-        temp = temp->next;
+    string str;
+    if(temp->next!=nullptr){
+        return std::to_string(temp->value)+" "+to_string(temp->next);
     }
-    cout << endl;
+    if(temp!=nullptr){
+        return std::to_string(temp->value);
+    }
+    return "";
 }
 
-List::Node* List::getHead()
-{
-    Node* temp = head->next;
-    return temp;
-}
-void List::print(Node* temp)
-{
-    if (temp != nullptr) {
-        cout << temp->value << " ";
-        print(temp->next);
-    }
-    else {
-        cout << endl;
-        return;
-    }
-        
-}
+
+// List::Node* List::getHead()
+// {
+//     Node* temp = head->next;
+//     return temp;
+// }
+
 
 void List::clear() {
 	while (head != nullptr)

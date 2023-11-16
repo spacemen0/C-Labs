@@ -2,7 +2,7 @@
 #include <string>
 
 /// <summary>
-/// The head pointer is only symbolic and not part of the actual value of the list, and is never a nullptr,
+/// The head pointer is only symbolic and not part of the actual value of the list,
 /// thus the length of the list is equal to "number of Nodes it contains" - 1
 /// </summary>
 class List
@@ -27,9 +27,10 @@ public:
 	void insert(int value);
 	int at(int index);
 	std::string to_string();
-	void print();
-        void print(Node* temp);// recursive print
-        Node* getHead();
+	std::string to_string(Node* temp);
+	// void print();
+    //     void print(Node* temp);// recursive print
+        // Node* getHead();
 	void clear();
 private:
 	Node* head{};
