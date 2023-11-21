@@ -71,7 +71,7 @@ void List::insert(int value)
 /// </summary>
 /// <param name="index"></param>
 /// <returns></returns>
-int List::at(int index)
+int List::at(int index) const
 {
     Node *temp = head->next;
     if (index < 0)
@@ -93,14 +93,14 @@ int List::at(int index)
     return temp->value;
 }
 
-std::string List::to_string()
+std::string List::to_string() const
 {
     string str;
     Node *temp = head->next;
     return to_string(temp);
 }
 
-std::string List::to_string(Node *temp)
+std::string List::to_string(const Node *temp) const
 {
     string str;
     if (temp->next != nullptr)
@@ -176,22 +176,22 @@ List::Node::Node(int value)
     next = nullptr;
 }
 
-List& List::operator=(List const& other)
+List &List::operator=(List const &other)
 {
     if (this != &other)
     {
-     clear();
-     head = new Node(0);
-     Node* otherCurrent = other.head->next;
-     Node* current = head;
+        clear();
+        head = new Node(0);
+        Node *otherCurrent = other.head->next;
+        Node *current = head;
 
-     while (otherCurrent != nullptr)
-     {
-         Node* newNode = new Node(otherCurrent->value);
-         current->next = newNode;
-         current = current->next;
-         otherCurrent = otherCurrent->next;
-     }
+        while (otherCurrent != nullptr)
+        {
+            Node *newNode = new Node(otherCurrent->value);
+            current->next = newNode;
+            current = current->next;
+            otherCurrent = otherCurrent->next;
+        }
     }
     return *this;
 }
