@@ -1,9 +1,23 @@
-#include "../catch.hpp"
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
 #include "List.h"
 
 //=======================================================================
 // Test cases
 //=======================================================================
+
+// TODO: Complementary work needed: Test cases insufficient, what if a list is 
+// empty for all functions? 
+
+// TODO: Complementary work needed: Test cases insufficient, you should test 
+// all functionality for copy, such as remove values in the copied list and if this 
+// affects the original. 
+
+// TODO: Complementary work needed: Test cases insufficient, test  
+// all functionality for insert/remove such as inserting to an empt list and so on
+
+// TODO: Complementary work needed: Test cases insufficient, you should test  
+// all functions that you have implemented. 
 
 TEST_CASE("Create list")
 {
