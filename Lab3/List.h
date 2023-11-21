@@ -25,7 +25,7 @@
 
 class List
 {
-public:
+private:
 	class Node
 	{
 	public:
@@ -33,6 +33,9 @@ public:
 		Node *next;
 		Node(int value);
 	};
+	Node *head{};
+
+public:
 	List();						 // default constructor
 	List(List const &other);	 // copy constructor
 	List(List &&other) noexcept; // move constructor
@@ -50,8 +53,5 @@ public:
 	//     void print(Node* temp);// recursive print
 	// Node* getHead();
 	void clear();
-
-private:
-	Node *head{};
 };
 #endif // !List_H
