@@ -171,17 +171,20 @@ List::Node::Node(int value)
 
 List& List::operator=(List const& other)
 {
-    clear();
-    head = new Node(0);
-    Node* otherCurrent = other.head->next;
-    Node* current = head;
-
-    while (otherCurrent != nullptr)
+    if (this != &other)
     {
-        Node* newNode = new Node(otherCurrent->value);
-        current->next = newNode;
-        current = current->next;
-        otherCurrent = otherCurrent->next;
+     clear();
+     head = new Node(0);
+     Node* otherCurrent = other.head->next;
+     Node* current = head;
+
+     while (otherCurrent != nullptr)
+     {
+         Node* newNode = new Node(otherCurrent->value);
+         current->next = newNode;
+         current = current->next;
+         otherCurrent = otherCurrent->next;
+     }
     }
     return *this;
 }

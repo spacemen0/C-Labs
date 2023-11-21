@@ -29,6 +29,14 @@ TEST_CASE("Create list")
 	l.insert(5);
 	CHECK(l.at(3) == 5);
 	CHECK(l.at(5) == 7);
+
+}
+TEST_CASE("TEST EMPTY CASE")
+{
+	List 1;
+
+	CHECK(1)
+
 }
 
 TEST_CASE("REMOVE ELEMENTS")
