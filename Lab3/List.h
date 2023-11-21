@@ -1,4 +1,4 @@
-#ifndef TList_H
+#ifndef List_H
 #define List_H
 #include <iostream>
 #include <string>
