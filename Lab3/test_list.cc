@@ -1,23 +1,23 @@
 #define CATCH_CONFIG_MAIN
-#include "catch.hpp"
+#include "../catch.hpp"
 #include "List.h"
 
 //=======================================================================
 // Test cases
 //=======================================================================
 
-// TODO: Complementary work needed: Test cases insufficient, what if a list is 
-// empty for all functions? 
+// TODO: Complementary work needed: Test cases insufficient, what if a list is
+// empty for all functions?
 
-// TODO: Complementary work needed: Test cases insufficient, you should test 
-// all functionality for copy, such as remove values in the copied list and if this 
-// affects the original. 
+// TODO: Complementary work needed: Test cases insufficient, you should test
+// all functionality for copy, such as remove values in the copied list and if this
+// affects the original.
 
-// TODO: Complementary work needed: Test cases insufficient, test  
+// TODO: Complementary work needed: Test cases insufficient, test
 // all functionality for insert/remove such as inserting to an empt list and so on
 
-// TODO: Complementary work needed: Test cases insufficient, you should test  
-// all functions that you have implemented. 
+// TODO: Complementary work needed: Test cases insufficient, you should test
+// all functions that you have implemented.
 
 TEST_CASE("Create list")
 {
@@ -44,15 +44,15 @@ TEST_CASE("COPY AND TO_STRING")
 {
 	List l{2, 5, 1, 3, 8, 4};
 	List a{l};
-	List b=std::move(a);
+	List b = std::move(a);
 	CHECK(l.to_string() == "1 2 3 4 5 8");
 	CHECK(b.to_string() == "1 2 3 4 5 8");
 	List c{};
-	c=std::move(b);
+	c = std::move(b);
 	CHECK(c.to_string() == "1 2 3 4 5 8");
-	List d=c;
+	List d = c;
 	CHECK(d.to_string() == "1 2 3 4 5 8");
 	List e{};
-	e=c;
+	e = c;
 	CHECK(e.to_string() == "1 2 3 4 5 8");
 }
