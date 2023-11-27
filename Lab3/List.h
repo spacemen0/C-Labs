@@ -12,9 +12,6 @@
 // “The link class and any functions pertaining to it should thus be stashed
 // away and be inaccessible to the programmer.”
 
-// TODO: Complementary work needed: Use reference to constant for input parameters of
-// class type.
-
 class List
 {
 private:
@@ -26,21 +23,21 @@ private:
 		Node(int value);
 	};
 	Node *head{};
-
+	List &operator=(const List &other);			   // copy assignment operator
+	List &operator=(List &&other) noexcept;		   // move assignment operator
+	std::string to_string(const Node *temp) const; // declare as const
 public:
 	List();						 // default constructor
 	List(const List &other);	 // copy constructor
 	List(List &&other) noexcept; // move constructor
 	List(std::initializer_list<int> list);
-	~List();								// destructor
-	List &operator=(const List &other);		// copy assignment operator
-	List &operator=(List &&other) noexcept; // move assignment operator
+	~List(); // destructor
 	void remove(int value);
 	void remove_at(int index);
 	void insert(int value);
-	int at(int index) const;					   // declare as const
-	std::string to_string() const;				   // declare as const
-	std::string to_string(const Node *temp) const; // declare as const
+	int at(int index) const;	   // declare as const
+	std::string to_string() const; // declare as const
+
 	void clear();
 };
 #endif // !List_H

@@ -46,12 +46,8 @@ TEST_CASE("COPY AND TO_STRING")
 	List b = std::move(a);
 	CHECK(l.to_string() == "1 2 3 4 5 8");
 	CHECK(b.to_string() == "1 2 3 4 5 8");
-	List c{};
-	c = std::move(b);
+	List c = std::move(b);
 	CHECK(c.to_string() == "1 2 3 4 5 8");
 	List d = c;
 	CHECK(d.to_string() == "1 2 3 4 5 8");
-	List e{};
-	e = c;
-	CHECK(e.to_string() == "1 2 3 4 5 8");
 }

@@ -4,9 +4,6 @@ using namespace std;
 // TODO: Complementary work needed: Your assignment operator(s) don’t
 // handle self-assignment, as in a_list = a_list.
 
-// TODO: Complementary work needed: Code duplication. Can you perhaps
-// reuse the code from clear() for destructor?
-
 void List::remove(int value)
 {
     Node *beforeTemp = head;
@@ -67,7 +64,7 @@ void List::insert(int value)
 
 /// <summary>
 /// Get the value of the list at the given index;
-/// index shoud be [0, length)
+/// index should be [0, length)
 /// </summary>
 /// <param name="index"></param>
 /// <returns></returns>
@@ -113,12 +110,6 @@ std::string List::to_string(const Node *temp) const
     }
     return "";
 }
-
-// List::Node* List::getHead()
-// {
-//     Node* temp = head->next;
-//     return temp;
-// }
 
 void List::clear()
 {
