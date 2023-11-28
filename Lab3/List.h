@@ -8,10 +8,6 @@
 /// thus the length of the list is equal to "number of Nodes it contains" - 1
 /// </summary>
 
-// From assignment:
-// “The link class and any functions pertaining to it should thus be stashed
-// away and be inaccessible to the programmer.”
-
 class List
 {
 private:
@@ -23,13 +19,14 @@ private:
 		Node(int value);
 	};
 	Node *head{};
-	List &operator=(const List &other);			   // copy assignment operator
-	List &operator=(List &&other) noexcept;		   // move assignment operator
+
 	std::string to_string(const Node *temp) const; // declare as const
 public:
-	List();						 // default constructor
-	List(const List &other);	 // copy constructor
-	List(List &&other) noexcept; // move constructor
+	List();									// default constructor
+	List(const List &other);				// copy constructor
+	List &operator=(const List &other);		// copy assignment operator
+	List(List &&other) noexcept;			// move constructor
+	List &operator=(List &&other) noexcept; // move assignment operator
 	List(std::initializer_list<int> list);
 	~List(); // destructor
 	void remove(int value);

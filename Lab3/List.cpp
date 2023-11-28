@@ -70,6 +70,10 @@ void List::insert(int value)
 /// <returns></returns>
 int List::at(int index) const
 {
+    if (head == nullptr)
+    {
+        throw invalid_argument("List is destroyed");
+    }
     Node *temp = head->next;
     if (index < 0)
     {
@@ -87,7 +91,9 @@ int List::at(int index) const
             throw invalid_argument("Index out of length");
         }
     }
-    return temp->value;
+    if (temp != nullptr)
+        return temp->value;
+    throw invalid_argument("Index out of length");
 }
 
 std::string List::to_string() const
@@ -119,6 +125,7 @@ void List::clear()
         head = head->next;
         delete temp;
     }
+    head = nullptr;
 }
 
 List::List()
@@ -167,7 +174,7 @@ List::Node::Node(int value)
     next = nullptr;
 }
 
-List &List::operator=(List const &other)
+List &List::operator=(const List &other)
 {
     if (this != &other)
     {
