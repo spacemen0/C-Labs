@@ -8,6 +8,9 @@
 /// thus the length of the list is equal to "number of Nodes it contains" - 1
 /// </summary>
 
+// TODO: Complementary work needed: The public part should be first, and the
+// private part should be below. There should only be one private part.
+
 class List
 {
 private:

@@ -5,6 +5,11 @@
 // Test cases
 //=======================================================================
 
+// TODO: Complementary work needed: You don't test move properly, use std::move()
+
+// TODO: Complementary work needed: You need to test all your functions that you have
+// created before you can use them to prove that other lists work.
+
 TEST_CASE("Create list")
 {
 	List l{1, 11, 3, 2, 6, 9, 8, 7};

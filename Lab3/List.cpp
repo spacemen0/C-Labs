@@ -1,11 +1,9 @@
 #include "List.h"
 using namespace std;
 
-// TODO: Complementary work needed: Your assignment operator(s) don’t
-// handle self-assignment, as in a_list = a_list.
+// TODO: Complementary work needed: You are missing a print() function.
 
-// I don't understand what you mean by this. My understanding is the assignment operators have already
-// handled self-assignment by checking if (this != &other).
+// COMMENT: Rather than throwing an argument which you never catch, use cerr instead.
 
 void List::remove(int value)
 {
