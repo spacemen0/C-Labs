@@ -13,18 +13,11 @@
 
 class List
 {
-private:
-	class Node
-	{
-	public:
-		int value;
-		Node *next;
-		Node(int value);
-	};
-	Node *head{};
 
-	std::string to_string(const Node *temp) const; // declare as const
 public:
+	static const int ERROR_OUT_OF_LENGTH;
+	static const int ERROR_NEGATIVE_INDEX;
+	static const int ERROR_EMPTY_LIST;
 	List();									// default constructor
 	List(const List &other);				// copy constructor
 	List &operator=(const List &other);		// copy assignment operator
@@ -37,7 +30,19 @@ public:
 	void insert(int value);
 	int at(int index) const;	   // declare as const
 	std::string to_string() const; // declare as const
-
+	void print() const;			   // declare as const
 	void clear();
+
+private:
+	class Node
+	{
+	public:
+		int value;
+		Node *next;
+		Node(int value);
+	};
+	Node *head{};
+
+	std::string to_string(const Node *temp) const; // declare as const
 };
 #endif // !List_H

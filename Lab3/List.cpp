@@ -5,6 +5,9 @@ using namespace std;
 
 // COMMENT: Rather than throwing an argument which you never catch, use cerr instead.
 
+const int List::ERROR_OUT_OF_LENGTH = -1;
+const int List::ERROR_NEGATIVE_INDEX = -2;
+const int List::ERROR_EMPTY_LIST = -3;
 void List::remove(int value)
 {
     Node *beforeTemp = head;
@@ -28,7 +31,7 @@ void List::remove_at(int index)
     Node *temp = head->next;
     if (index < 0)
     {
-        throw invalid_argument("Index can not be negative");
+        cerr << "Index can not be negative" << endl;
     }
     while (index > 0)
     {
@@ -40,7 +43,7 @@ void List::remove_at(int index)
         }
         else
         {
-            throw invalid_argument("Index out of length");
+            cerr << "Index out of length" << endl;
         }
     }
     beforeTemp->next = temp->next;
@@ -73,12 +76,14 @@ int List::at(int index) const
 {
     if (head == nullptr)
     {
-        throw invalid_argument("List is destroyed");
+        cerr << "List is destroyed" << endl;
+        return ERROR_EMPTY_LIST;
     }
     Node *temp = head->next;
     if (index < 0)
     {
-        throw invalid_argument("Index can not be negative");
+        cerr << "Index can not be negative" << endl;
+        return ERROR_NEGATIVE_INDEX;
     }
     while (index > 0)
     {
@@ -89,12 +94,14 @@ int List::at(int index) const
         }
         else
         {
-            throw invalid_argument("Index out of length");
+            cerr << "Index out of length" << endl;
+            return ERROR_OUT_OF_LENGTH;
         }
     }
     if (temp != nullptr)
         return temp->value;
-    throw invalid_argument("Index out of length");
+    cerr << "Index out of length" << endl;
+    return ERROR_OUT_OF_LENGTH;
 }
 
 std::string List::to_string() const
@@ -102,6 +109,11 @@ std::string List::to_string() const
     string str;
     Node *temp = head->next;
     return to_string(temp);
+}
+
+void List::print() const
+{
+    cout << to_string() << endl;
 }
 
 std::string List::to_string(const Node *temp) const
