@@ -5,9 +5,6 @@
 // Test cases
 //=======================================================================
 
-// TODO: Complementary work needed: You need to test all your functions that you have
-// created before you can use them to prove that other lists work.
-
 TEST_CASE("Create list")
 {
 	List l{1, 11, 3, 2, 6, 9, 8, 7};
@@ -39,17 +36,19 @@ TEST_CASE("REMOVE ELEMENTS")
 
 TEST_CASE("COPY AND TO_STRING")
 {
+	List test_to_string{1, 11, 3, 2, 6, 9, 8, 7};
+	CHECK(test_to_string.to_string() == "1 2 3 6 7 8 9 11");
 	List moveAssignment;
 	moveAssignment = std::move(List{10, 20, 30});
-	List moveConstructor = std::move(List{10, 20, 30});
-	List copyConstructor{std::move(moveConstructor)};
+	List moveConstructor = std::move(moveAssignment);
+	List copyConstructor{moveConstructor};
 	List copyAssignment;
-	copyAssignment = std::move(copyConstructor);
+	copyAssignment = copyConstructor;
 	CHECK(copyAssignment.to_string() == "10 20 30");
-	CHECK(copyConstructor.to_string() == "");
-	CHECK(moveAssignment.to_string() == "10 20 30");
-	CHECK(moveConstructor.to_string() == "");
+	CHECK(copyConstructor.to_string() == "10 20 30");
+	CHECK(moveConstructor.to_string() == "10 20 30");
+	CHECK(moveAssignment.to_string() == "");
 	copyAssignment.remove(10);
 	copyAssignment.insert(40);
-	CHECK(copyConstructor.to_string() == "");
+	CHECK(copyConstructor.to_string() == "10 20 30");
 }

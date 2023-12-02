@@ -1,10 +1,6 @@
 #include "List.h"
 using namespace std;
 
-// TODO: Complementary work needed: You are missing a print() function.
-
-// COMMENT: Rather than throwing an argument which you never catch, use cerr instead.
-
 const int List::ERROR_OUT_OF_LENGTH = -1;
 const int List::ERROR_NEGATIVE_INDEX = -2;
 const int List::ERROR_EMPTY_LIST = -3;
@@ -107,6 +103,10 @@ int List::at(int index) const
 std::string List::to_string() const
 {
     string str;
+    if (head == nullptr)
+    {
+        return "";
+    }
     Node *temp = head->next;
     return to_string(temp);
 }
