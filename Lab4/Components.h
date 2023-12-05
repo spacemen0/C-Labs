@@ -1,3 +1,5 @@
+#ifndef COMPONENTS_H
+#define COMPONENTS_H
 #include <string>
 #include "Connection.h"
 class Component
@@ -65,3 +67,4 @@ private:
     double capacitance;
     double storedCharge;
 };
+#endif

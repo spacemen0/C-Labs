@@ -1,3 +1,5 @@
+#ifndef CONNECTION_H
+#define CONNECTION_H
 class Connection
 {
 public:
@@ -5,3 +7,4 @@ public:
 
     double voltage;
 };
+#endif
