@@ -1,7 +1,7 @@
 #include "Components.h"
-Battery::Battery(const std::string &name, double batteryVoltage, Connection &p, Connection &n) : Component(name, p, n)
+Battery::Battery(const std::string &name, double batteryVoltage, Connection &p, Connection &n) : Component(name, p, n), batteryVoltage(batteryVoltage)
 {
-    this->batteryVoltage = batteryVoltage;
+    
 }
 
 void Battery::simulate(double timeStep)
