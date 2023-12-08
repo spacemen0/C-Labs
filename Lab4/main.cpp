@@ -2,7 +2,6 @@
 #include "Connection.h"
 #include "Components.h"
 
-
 int convertIntArgument(const char *arg, const char *argName)
 {
     try
@@ -44,7 +43,6 @@ int main(int argc, char *argv[])
         std::cerr << "Error: Invalid number of command line arguments. Expected 4 arguments." << std::endl;
         return 1;
     }
-
     int iterations = convertIntArgument(argv[1], "iterations");
     int printLines = convertIntArgument(argv[2], "printLines");
     double timeStep = convertDoubleArgument(argv[3], "timeStep");
