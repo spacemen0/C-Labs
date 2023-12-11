@@ -90,4 +90,14 @@ int main(int argc, char *argv[])
             return 1;
         }
     }
+
+    for (auto &operation : operations)
+    {
+        cout << operation->name() << ":" << endl;
+    }
+
+    for (auto &operation : operations)
+    {
+        operation->execute();
+    }
 }
