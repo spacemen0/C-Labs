@@ -5,22 +5,15 @@
 class Component
 {
 public:
-    Component() : name(""), positive(*(new Connection())), negative(*(new Connection())), voltage(0), current(0) {}
-    Component(const std::string &name, Connection &p, Connection &n)
-        : name{name}, positive{p}, negative{n}
-    {
-        voltage = 0;
-        current = 0;
-    }
+    Component();
+    Component(const std::string &name, Connection &p, Connection &n);
+
     virtual ~Component() = default;
 
     virtual void simulate(double timeStep) = 0;
     virtual double getVoltage() const = 0;
     virtual double getCurrent() const = 0;
-    std::string getName() const
-    {
-        return name;
-    };
+    std::string getName() const ;
 
 protected:
     std::string name;

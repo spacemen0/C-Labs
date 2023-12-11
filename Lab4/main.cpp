@@ -2,8 +2,24 @@
 #include "Connection.h"
 #include "Components.h"
 
-template <typename T>
-T convertArgument(const char *arg, const char *argName)
+int convertIntArgument(const char *arg, const char *argName)
+{
+    try
+    {
+        return std::stoi(arg);
+    }
+    catch (const std::invalid_argument &e)
+    {
+        std::cerr << "Error: Invalid input for " << argName << std::endl;
+        exit(1);
+    }
+    catch (const std::out_of_range &e)
+    {
+        std::cerr << "Error: Value of " << argName << " out of range" << std::endl;
+        exit(1);
+    }
+}
+double convertDoubleArgument(const char *arg, const char *argName)
 {
     try
     {
@@ -20,7 +36,6 @@ T convertArgument(const char *arg, const char *argName)
         exit(1);
     }
 }
-
 int main(int argc, char *argv[])
 {
     if (argc != 5)
@@ -28,11 +43,10 @@ int main(int argc, char *argv[])
         std::cerr << "Error: Invalid number of command line arguments. Expected 4 arguments." << std::endl;
         return 1;
     }
-
-    int iterations = convertArgument<int>(argv[1], "iterations");
-    int printLines = convertArgument<int>(argv[2], "printLines");
-    double timeStep = convertArgument<double>(argv[3], "timeStep");
-    double batteryVoltage = convertArgument<double>(argv[4], "batteryVoltage");
+    int iterations = convertIntArgument(argv[1], "iterations");
+    int printLines = convertIntArgument(argv[2], "printLines");
+    double timeStep = convertDoubleArgument(argv[3], "timeStep");
+    double batteryVoltage = convertDoubleArgument(argv[4], "batteryVoltage");
 
     {
         Connection p, l, r, n;
