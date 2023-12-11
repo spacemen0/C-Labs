@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <utility>
-#include "Operation.h"
+#include "Operations.h"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     }
 
     string filename = argv[1];
+    // Rewrite using ranges::for_each
     vector<pair<string, string>> arguments;
     for (int i = 2; i < argc; i += 1)
     {
@@ -60,4 +61,33 @@ int main(int argc, char *argv[])
     // {
     //     cout << word << endl;
     // }
+    vector<Operation *> operations;
+    for (auto &argument : arguments)
+    {
+        if (argument.first == "print")
+        {
+            operations.push_back(new Print(words));
+        }
+        else if (argument.first == "frequency")
+        {
+            operations.push_back(new Frequency(words));
+        }
+        else if (argument.first == "table")
+        {
+            operations.push_back(new Table(words));
+        }
+        else if (argument.first == "substitute")
+        {
+            operations.push_back(new Substitute(words, argument.second.substr(0, argument.second.find('+')), argument.second.substr(argument.second.find('+') + 1)));
+        }
+        else if (argument.first == "remove")
+        {
+            operations.push_back(new Remove(words, argument.second));
+        }
+        else
+        {
+            cerr << "Error: Unknown operation '" << argument.first << "'." << endl;
+            return 1;
+        }
+    }
 }
