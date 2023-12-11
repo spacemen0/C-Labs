@@ -1,10 +1,6 @@
 #include "Operations.h"
 
-Frequency::Frequency() : Operation()
-{
-}
-
-Frequency::Frequency(const std::vector<std::string> &words) : Operation(words)
+Frequency::Frequency(std::vector<std::string> &words) : Operation(words)
 {
 }
 

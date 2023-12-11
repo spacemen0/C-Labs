@@ -3,26 +3,25 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <ranges>
 #include <map>
 #include <iostream>
 class Operation
 {
 public:
-    Operation();
-    Operation(const std::vector<std::string> &words);
+    Operation(std::vector<std::string> &words);
     virtual void execute() = 0;
     ~Operation() = default;
     virtual std::string name() = 0;
 
 protected:
-    std::vector<std::string> words;
+    std::vector<std::string> &words;
 };
 
 class Print : public Operation
 {
 public:
-    Print();
-    Print(const std::vector<std::string> &words);
+    Print(std::vector<std::string> &words);
     void execute() override;
     std::string name() override;
 };
@@ -30,8 +29,7 @@ public:
 class Frequency : public Operation
 {
 public:
-    Frequency();
-    Frequency(const std::vector<std::string> &words);
+    Frequency(std::vector<std::string> &words);
     void execute() override;
     std::string name() override;
 };
@@ -39,8 +37,7 @@ public:
 class Table : public Operation
 {
 public:
-    Table();
-    Table(const std::vector<std::string> &words);
+    Table(std::vector<std::string> &words);
     void execute() override;
     std::string name() override;
 };
@@ -48,8 +45,7 @@ public:
 class Substitute : public Operation
 {
 public:
-    Substitute();
-    Substitute(const std::vector<std::string> &words, const std::string &oldWord, const std::string &newWord);
+    Substitute(std::vector<std::string> &words, const std::string &oldWord, const std::string &newWord);
     void execute() override;
     std::string name() override;
 
@@ -61,8 +57,7 @@ private:
 class Remove : public Operation
 {
 public:
-    Remove();
-    Remove(const std::vector<std::string> &words, const std::string &word);
+    Remove(std::vector<std::string> &words, const std::string &word);
     void execute() override;
     std::string name() override;
 

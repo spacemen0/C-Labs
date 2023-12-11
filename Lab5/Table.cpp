@@ -1,31 +1,24 @@
 #include "Operations.h"
 
-Table::Table() : Operation()
-{
-}
-
-Table::Table(const std::vector<std::string> &words) : Operation(words)
+Table::Table(std::vector<std::string> &words) : Operation(words)
 {
 }
 
 void Table::execute()
 {
     std::map<std::string, int> wordMap;
-    for (auto word : words)
-    {
-        if (wordMap.find(word) == wordMap.end())
-        {
-            wordMap[word] = 1;
-        }
-        else
-        {
-            wordMap[word]++;
-        }
-    }
-    for (auto word : wordMap)
-    {
-        std::cout << word.first << " " << word.second << std::endl;
-    }
+    std::ranges::for_each(words, [&](std::string &word)
+                          { 
+            if  (wordMap.find(word) == wordMap.end())
+                {
+                    wordMap[word] = 1;
+                }
+                else
+                {
+                    wordMap[word]++;
+                }; });
+    std::ranges::for_each(wordMap, [&](std::pair<std::string, int> word)
+                          { std::cout << word.first << " " << word.second << std::endl; });
 }
 
 std::string Table::name()

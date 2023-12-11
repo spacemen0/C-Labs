@@ -1,23 +1,13 @@
 #include "Operations.h"
 
-Remove::Remove() : Operation()
-{
-}
-
-Remove::Remove(const std::vector<std::string> &words, const std::string &word) : Operation(words), word(word)
+Remove::Remove(std::vector<std::string> &words, const std::string &word) : Operation(words), word(word)
 {
 }
 
 void Remove::execute()
 {
-    for (int i = 0; i < words.size(); i++)
-    {
-        if (words[i] == word)
-        {
-            words.erase(words.begin() + i);
-            i--;
-        }
-    }
+    auto pos = std::ranges::remove(words, word);
+    words.erase(pos.begin(), pos.end());
 }
 
 std::string Remove::name()

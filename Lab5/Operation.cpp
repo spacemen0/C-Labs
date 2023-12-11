@@ -1,9 +1,5 @@
 #include "Operations.h"
 
-Operation::Operation()
-{
-}
-
-Operation::Operation(const std::vector<std::string> &words) : words(words)
+Operation::Operation(std::vector<std::string> &words) : words(words)
 {
 }

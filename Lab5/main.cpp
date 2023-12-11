@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    if (argc <= 3)
+    if (argc < 3)
     {
         cerr << "Error: Insufficient command-line arguments.\n"
              << "Usage: " << argv[0]
@@ -23,17 +23,35 @@ int main(int argc, char *argv[])
     for (int i = 2; i < argc; i += 1)
     {
         string arg = argv[i];
-        // TO-DO: check if arg is valid
         if (arg.find('=') == string::npos)
         {
-            string operation = arg.substr(2);
-            arguments.push_back(make_pair(operation, ""));
+            string flag;
+            try
+            {
+                flag = arg.substr(2);
+            }
+            catch (const std::out_of_range &e)
+            {
+                cerr << "Error: Invalid argument '" << arg << "'." << endl;
+                return 1;
+            }
+
+            arguments.push_back(make_pair(flag, ""));
         }
         else
         {
-            string operation = arg.substr(2, arg.find('=') - 2);
-            string parameter = arg.substr(arg.find('=') + 1);
-            arguments.push_back(make_pair(operation, parameter));
+            string flag, parameter;
+            try
+            {
+                flag = arg.substr(2, arg.find('=') - 2);
+                parameter = arg.substr(arg.find('=') + 1);
+            }
+            catch (const std::out_of_range &e)
+            {
+                cerr << "Error: Invalid argument '" << arg << "'." << endl;
+                return 1;
+            }
+            arguments.push_back(make_pair(flag, parameter));
         }
     }
 

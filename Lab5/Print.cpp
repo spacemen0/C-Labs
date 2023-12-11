@@ -1,10 +1,6 @@
 #include "Operations.h"
 
-Print::Print() : Operation()
-{
-}
-
-Print::Print(const std::vector<std::string> &words) : Operation(words)
+Print::Print(std::vector<std::string> &words) : Operation(words)
 {
 }
 
