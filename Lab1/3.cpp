@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
-#include<iomanip>
-#include<fstream>
+#include <iomanip>
+#include <fstream>
 using namespace std;
 int main() // hello
 {
-	ifstream ifs{ "random.txt" };
+	ifstream ifs{"random.txt"};
 	string word{};
 	size_t shortest = 100, longest = 0;
 	string shortestword, longestword;

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include<iomanip>
+#include <iomanip>
 using namespace std;
 int main() // hello
 {
@@ -40,20 +40,19 @@ int main() // hello
 		cin >> percentage;
 	}
 	cout << endl;
-	//cout << firstprice <<" " <<lastprice << " " << stride << " " << percentage;
+	// cout << firstprice <<" " <<lastprice << " " << stride << " " << percentage;
 
 	cout << "tax table" << endl;
 	cout << setfill('=') << setw(10) << " " << endl;
 	cout << setfill(' ') << setw(20) << "price" << setw(20) << "tax" << setw(20) << "price with tax" << endl;
 	cout << setfill('-') << setw(61) << " " << endl;
-	int numiteration = (lastprice - firstprice)/stride ;
-	//for (float i = firstprice; i <= lastprice; i = i + stride)
+	int numiteration = (lastprice - firstprice) / stride;
+	// for (float i = firstprice; i <= lastprice; i = i + stride)
 	for (int i = 0; i <= numiteration; ++i)
 	{
-		cout << setfill(' ') << setw(20) << fixed << setprecision(2) << firstprice+i*stride << setw(20) << 0.01f * (firstprice+i*stride) * percentage << setw(20) << (firstprice+stride*i) + 0.01f * (firstprice+stride*i)* percentage << endl;
+		cout << setfill(' ') << setw(20) << fixed << setprecision(2) << firstprice + i * stride << setw(20) << 0.01f * (firstprice + i * stride) * percentage << setw(20) << (firstprice + stride * i) + 0.01f * (firstprice + stride * i) * percentage << endl;
 	}
 	//{
 	//	cout << setfill(' ') << setw(20) << fixed << setprecision(2) << i << setw(20) << 0.01f *i * percentage<< setw(20) << i + 0.01f*i * percentage << endl;
 	//}
-
 }
