@@ -1,6 +1,6 @@
 #include "Operations.h"
 
-Table::Table(std::vector<std::string> &words, int maxLen) : Operation(words), maxLen(maxLen)
+Table::Table(std::vector<std::string> &words, std::size_t maxLen) : Operation(words), maxLen(maxLen)
 {
 }
 

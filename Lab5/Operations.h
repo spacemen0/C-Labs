@@ -30,23 +30,23 @@ public:
 class Frequency : public Operation
 {
 public:
-    Frequency(std::vector<std::string> &words, int maxLen);
+    Frequency(std::vector<std::string> &words, std::size_t maxLen);
     void execute() override;
     std::string name() override;
 
 private:
-    int maxLen;
+    std::size_t maxLen;
 };
 
 class Table : public Operation
 {
 public:
-    Table(std::vector<std::string> &words, int maxLen);
+    Table(std::vector<std::string> &words, std::size_t maxLen);
     void execute() override;
     std::string name() override;
 
 private:
-    int maxLen;
+    std::size_t maxLen;
 };
 
 class Substitute : public Operation

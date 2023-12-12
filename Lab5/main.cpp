@@ -7,7 +7,7 @@
 #include "Operations.h"
 using namespace std;
 
-void processArgument(const pair<string, string> &argument, vector<Operation *> &operations, vector<string> &words, int maxLen)
+void processArgument(const pair<string, string> &argument, vector<Operation *> &operations, vector<string> &words, size_t maxLen)
 {
     if (argument.first == "print")
     {
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
             {
                 flag = arg.substr(2);
             }
-            catch (const std::out_of_range &e)
+            catch (const out_of_range &e)
             {
                 cerr << "Error: Invalid argument '" << arg << "'." << endl;
                 return 1;
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
                 flag = arg.substr(2, arg.find('=') - 2);
                 parameter = arg.substr(arg.find('=') + 1);
             }
-            catch (const std::out_of_range &e)
+            catch (const out_of_range &e)
             {
                 cerr << "Error: Invalid argument '" << arg << "'." << endl;
                 return 1;
@@ -92,21 +92,21 @@ int main(int argc, char *argv[])
 
     vector<string> words;
     copy(istream_iterator<string>(file), istream_iterator<string>(), back_inserter(words));
-    int maxLen = 0;
-    std::ranges::for_each(words, [&](auto &word)
-                          { maxLen = maxLen < word.length() ? word.length() : maxLen; });
+    size_t maxLen = 0;
+    ranges::for_each(words, [&](auto &word)
+                     { maxLen = maxLen < word.length() ? word.length() : maxLen; });
     file.close();
     vector<Operation *> operations;
-    std::ranges::for_each(arguments, [&](const auto &argument)
-                          { try
+    ranges::for_each(arguments, [&](const auto &argument)
+                     { try
                           {
                               processArgument(argument, operations, words, maxLen);
                           }
-                          catch(const std::invalid_argument& e)
+                          catch(const invalid_argument& e)
                           {
-                            std::cerr << e.what() << '\n';
+                            cerr << e.what() << '\n';
                           } });
 
-    std::ranges::for_each(operations, [](auto &operation)
-                          { operation->execute(); });
+    ranges::for_each(operations, [](auto &operation)
+                     { operation->execute(); });
 }

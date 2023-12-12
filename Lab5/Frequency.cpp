@@ -1,6 +1,6 @@
 #include "Operations.h"
 
-Frequency::Frequency(std::vector<std::string> &words, int maxLen) : Operation(words), maxLen(maxLen)
+Frequency::Frequency(std::vector<std::string> &words, std::size_t maxLen) : Operation(words), maxLen(maxLen)
 {
 }
 
