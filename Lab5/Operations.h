@@ -6,6 +6,7 @@
 #include <ranges>
 #include <map>
 #include <iostream>
+#include <iomanip>
 class Operation
 {
 public:
@@ -29,17 +30,23 @@ public:
 class Frequency : public Operation
 {
 public:
-    Frequency(std::vector<std::string> &words);
+    Frequency(std::vector<std::string> &words, int maxLen);
     void execute() override;
     std::string name() override;
+
+private:
+    int maxLen;
 };
 
 class Table : public Operation
 {
 public:
-    Table(std::vector<std::string> &words);
+    Table(std::vector<std::string> &words, int maxLen);
     void execute() override;
     std::string name() override;
+
+private:
+    int maxLen;
 };
 
 class Substitute : public Operation

@@ -7,6 +7,34 @@
 #include "Operations.h"
 using namespace std;
 
+void processArgument(const pair<string, string> &argument, vector<Operation *> &operations, vector<string> &words, int maxLen)
+{
+    if (argument.first == "print")
+    {
+        operations.push_back(new Print(words));
+    }
+    else if (argument.first == "frequency")
+    {
+        operations.push_back(new Frequency(words, maxLen));
+    }
+    else if (argument.first == "table")
+    {
+        operations.push_back(new Table(words, maxLen));
+    }
+    else if (argument.first == "substitute")
+    {
+        operations.push_back(new Substitute(words, argument.second.substr(0, argument.second.find('+')), argument.second.substr(argument.second.find('+') + 1)));
+    }
+    else if (argument.first == "remove")
+    {
+        operations.push_back(new Remove(words, argument.second));
+    }
+    else
+    {
+        throw invalid_argument("Unknown operation '" + argument.first + "'.");
+    }
+}
+
 int main(int argc, char *argv[])
 {
     if (argc < 3)
@@ -55,11 +83,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    // for (auto &argument : arguments)
-    // {
-    //     cout << argument.first << " " << argument.second << endl;
-    // }
-
     ifstream file(filename);
     if (!file)
     {
@@ -68,54 +91,22 @@ int main(int argc, char *argv[])
     }
 
     vector<string> words;
-    string word;
-    while (file >> word)
-    {
-        words.push_back(word);
-    }
+    copy(istream_iterator<string>(file), istream_iterator<string>(), back_inserter(words));
+    int maxLen = 0;
+    std::ranges::for_each(words, [&](auto &word)
+                          { maxLen = maxLen < word.length() ? word.length() : maxLen; });
     file.close();
-
-    // for (auto &word : words)
-    // {
-    //     cout << word << endl;
-    // }
     vector<Operation *> operations;
-    for (auto &argument : arguments)
-    {
-        if (argument.first == "print")
-        {
-            operations.push_back(new Print(words));
-        }
-        else if (argument.first == "frequency")
-        {
-            operations.push_back(new Frequency(words));
-        }
-        else if (argument.first == "table")
-        {
-            operations.push_back(new Table(words));
-        }
-        else if (argument.first == "substitute")
-        {
-            operations.push_back(new Substitute(words, argument.second.substr(0, argument.second.find('+')), argument.second.substr(argument.second.find('+') + 1)));
-        }
-        else if (argument.first == "remove")
-        {
-            operations.push_back(new Remove(words, argument.second));
-        }
-        else
-        {
-            cerr << "Error: Unknown operation '" << argument.first << "'." << endl;
-            return 1;
-        }
-    }
+    std::ranges::for_each(arguments, [&](const auto &argument)
+                          { try
+                          {
+                              processArgument(argument, operations, words, maxLen);
+                          }
+                          catch(const std::invalid_argument& e)
+                          {
+                            std::cerr << e.what() << '\n';
+                          } });
 
-    for (auto &operation : operations)
-    {
-        cout << operation->name() << ":" << endl;
-    }
-
-    for (auto &operation : operations)
-    {
-        operation->execute();
-    }
+    std::ranges::for_each(operations, [](auto &operation)
+                          { operation->execute(); });
 }

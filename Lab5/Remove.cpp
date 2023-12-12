@@ -6,8 +6,8 @@ Remove::Remove(std::vector<std::string> &words, const std::string &word) : Opera
 
 void Remove::execute()
 {
-    auto pos = std::ranges::remove(words, word);
-    words.erase(pos.begin(), pos.end());
+    auto removed = std::ranges::remove(words, word);
+    words.erase(removed.begin(), removed.end());
 }
 
 std::string Remove::name()

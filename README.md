@@ -16,4 +16,4 @@
 
 5. **Lab4:** g++ -std=c++17 main.cpp Resistor.cpp Circuit.cpp Capacity.cpp Battery.cpp
 
-6. **Lab5:** g++ -std=c++17 main.cpp Print.cpp Remove.cpp Substitute.cpp Table.cpp Frequency.cpp Operation.cpp
+6. **Lab5:** g++ -std=c++23 main.cpp Print.cpp Remove.cpp Substitute.cpp Table.cpp Frequency.cpp Operation.cpp

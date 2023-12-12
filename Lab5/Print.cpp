@@ -6,10 +6,8 @@ Print::Print(std::vector<std::string> &words) : Operation(words)
 
 void Print::execute()
 {
-    for (auto word : words)
-    {
-        std::cout << word << std::endl;
-    }
+    std::ranges::for_each(words, [](const auto &word)
+                          { std::cout << word << " "; });
 }
 
 std::string Print::name()
