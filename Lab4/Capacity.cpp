@@ -1,4 +1,8 @@
 #include "Components.h"
+
+// TODO: Complementary work needed: Use member initializer lists instead of
+// assigning initial values inside the constructor.
+//
 Capacitor::Capacitor(const std::string &name, double capacitance, Connection &p, Connection &n) : Component(name, p, n), capacitance(capacitance)
 {
     storedCharge = 0.0;

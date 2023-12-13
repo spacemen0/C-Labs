@@ -2,6 +2,10 @@
 #define COMPONENTS_H
 #include <string>
 #include "Connection.h"
+
+// TODO: Complementary work needed: Don’t keep unnecessary data members.
+// (voltage, current)
+//
 class Component
 {
 public:

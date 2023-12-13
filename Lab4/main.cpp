@@ -2,6 +2,9 @@
 #include "Connection.h"
 #include "Components.h"
 
+// TODO: Complementary work needed: Compiling your code with the
+// "-Wall -Wextra -Wpedantic" flags should result in 0 warnings.
+
 int convertIntArgument(const char *arg, const char *argName)
 {
     try
