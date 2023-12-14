@@ -61,7 +61,6 @@ int main(int argc, char *argv[])
             catch (const out_of_range &e)
             {
                 cerr << "Error: Invalid argument '" << arg << "'." << endl;
-                return 1;
             }
 
             arguments.push_back(make_pair(flag, ""));
@@ -77,7 +76,6 @@ int main(int argc, char *argv[])
             catch (const out_of_range &e)
             {
                 cerr << "Error: Invalid argument '" << arg << "'." << endl;
-                return 1;
             }
             arguments.push_back(make_pair(flag, parameter));
         }
@@ -108,5 +106,5 @@ int main(int argc, char *argv[])
                           } });
 
     ranges::for_each(operations, [](auto &operation)
-                     { operation->execute(); });
+                     { operation->execute(); });  
 }
