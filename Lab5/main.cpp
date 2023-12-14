@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <string>
 #include <vector>
+#include <iterator>
 #include <utility>
 #include "Operations.h"
 using namespace std;
@@ -46,7 +47,6 @@ int main(int argc, char *argv[])
     }
 
     string filename = argv[1];
-    // Rewrite using ranges::for_each
     vector<pair<string, string>> arguments;
     for (int i = 2; i < argc; i += 1)
     {
@@ -93,12 +93,12 @@ int main(int argc, char *argv[])
     vector<string> words;
     copy(istream_iterator<string>(file), istream_iterator<string>(), back_inserter(words));
     size_t maxLen = 0;
-    ranges::for_each(words, [&](auto &word)
-                     { maxLen = maxLen < word.length() ? word.length() : maxLen; });
+    for_each(words.begin(), words.end(), [&](auto &word)
+             { maxLen = maxLen < word.length() ? word.length() : maxLen; });
     file.close();
     vector<Operation *> operations;
-    ranges::for_each(arguments, [&](const auto &argument)
-                     { try
+    for_each(arguments.begin(), arguments.end(), [&](const auto &argument)
+             { try
                           {
                               processArgument(argument, operations, words, maxLen);
                           }
@@ -107,6 +107,6 @@ int main(int argc, char *argv[])
                             cerr << e.what() << '\n';
                           } });
 
-    ranges::for_each(operations, [](auto &operation)
-                     { operation->execute(); });
+    for_each(operations.begin(), operations.end(), [](auto &operation)
+             { operation->execute(); });
 }

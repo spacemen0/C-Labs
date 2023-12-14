@@ -6,8 +6,8 @@ Substitute::Substitute(std::vector<std::string> &words, const std::string &oldWo
 
 void Substitute::execute()
 {
-    std::ranges::for_each(words, [&](std::string &word)
-                          {
+    std::for_each(words.begin(), words.end(), [&](std::string &word)
+                  {
         if (word == oldWord) {
             word = newWord;
         } });

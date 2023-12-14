@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <ranges>
 #include <map>
 #include <iostream>
 #include <iomanip>

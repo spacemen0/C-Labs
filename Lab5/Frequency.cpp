@@ -8,8 +8,8 @@ void Frequency::execute()
 {
     std::map<std::string, int> frequencyMap;
 
-    std::ranges::for_each(words, [&](const auto &word)
-                          { frequencyMap[word] = std::count(words.begin(), words.end(), word); });
+    std::for_each(words.begin(), words.end(), [&](const auto &word)
+                  { frequencyMap[word] = std::count(words.begin(), words.end(), word); });
 
     std::vector<std::pair<std::string, int>> frequencyVector(frequencyMap.begin(), frequencyMap.end());
     std::sort(frequencyVector.begin(), frequencyVector.end(),
@@ -17,8 +17,8 @@ void Frequency::execute()
               { return a.second > b.second; });
 
     std::cout << std::right;
-    std::ranges::for_each(frequencyVector, [&](const auto &pair)
-                          { std::cout << std::setw(maxLen) << pair.first << " " << pair.second << std::endl; });
+    std::for_each(frequencyVector.begin(), frequencyVector.end(), [&](const auto &pair)
+                  { std::cout << std::setw(maxLen) << pair.first << " " << pair.second << std::endl; });
 }
 
 std::string Frequency::name()

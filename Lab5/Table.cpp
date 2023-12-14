@@ -7,11 +7,11 @@ Table::Table(std::vector<std::string> &words, std::size_t maxLen) : Operation(wo
 void Table::execute()
 {
     std::map<std::string, int> wordMap;
-    std::ranges::for_each(words, [&](const auto &word)
-                          { wordMap[word] = std::count(words.begin(), words.end(), word); });
+    std::for_each(words.begin(), words.end(), [&](const auto &word)
+                  { wordMap[word] = std::count(words.begin(), words.end(), word); });
     std::cout << std::left;
-    std::ranges::for_each(wordMap, [&](const auto &word)
-                          { std::cout << std::setw(maxLen) << word.first << " " << word.second << std::endl; });
+    std::for_each(wordMap.begin(), wordMap.end(), [&](const auto &word)
+                  { std::cout << std::setw(maxLen) << word.first << " " << word.second << std::endl; });
 }
 
 std::string Table::name()
