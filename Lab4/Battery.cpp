@@ -5,12 +5,9 @@ Battery::Battery(const std::string &name, double batteryVoltage, Connection &p, 
 
 void Battery::simulate(double timeStep)
 {
-
     (void)timeStep;
     positive = batteryVoltage;
     negative = 0;
-
-    // voltage = batteryVoltage;
 }
 
 double Battery::getVoltage() const
@@ -20,6 +17,5 @@ double Battery::getVoltage() const
 
 double Battery::getCurrent() const
 {
-    // return current;
     return 0;
 }

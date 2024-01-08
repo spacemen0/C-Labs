@@ -1,12 +1,6 @@
 ﻿#include "Circuit.h"
 #include "Components.h"
 
-// TODO: Complementary work needed: Treat warnings from valgrind as errors,
-// "valgrind ./a.out 200000 10 0.01 24" results in warnings about "Conditional
-// jump or move depens on unitialised value(s)"
-//
-// Comment: argName should've been a std::string const&. this is C++, not C.
-
 int convertIntArgument(const char *arg, std::string const &argName)
 {
     try
@@ -54,40 +48,40 @@ int main(int argc, char *argv[])
     double batteryVoltage{convertDoubleArgument(argv[4], "batteryVoltage")};
 
     {
-        Connection p, l, r, n;
+        Connection p{0.0}, l{0.0}, r{0.0}, n{0.0};
         Circuit net1(iterations, printLines, timeStep);
         net1.addComponent(new Battery("Bat", batteryVoltage, p, n));
-        // net1.addComponent(new Resistor("R1", 6, p, l));
-        // net1.addComponent(new Resistor("R2", 4, l, r));
-        // net1.addComponent(new Resistor("R3", 8, r, n));
-        // net1.addComponent(new Resistor("R4", 12, l, n));
+        net1.addComponent(new Resistor("R1", 6, p, l));
+        net1.addComponent(new Resistor("R2", 4, l, r));
+        net1.addComponent(new Resistor("R3", 8, r, n));
+        net1.addComponent(new Resistor("R4", 12, l, n));
         net1.printHeader();
         net1.simulate();
     }
-    // {
-    //     Connection p, l, r, n;
-    //     Circuit net2(iterations, printLines, timeStep);
-    //     net2.addComponent(new Battery("Bat", batteryVoltage, p, n));
-    //     net2.addComponent(new Resistor("R1", 150, p, l));
-    //     net2.addComponent(new Resistor("R2", 50, p, r));
-    //     net2.addComponent(new Resistor("R3", 100, r, l));
-    //     net2.addComponent(new Resistor("R4", 300, l, n));
-    //     net2.addComponent(new Resistor("R5", 250, r, n));
-    //     net2.printHeader();
-    //     net2.simulate();
-    // }
-    // {
-    //     Connection p, l, r, n;
-    //     Circuit net3(iterations, printLines, timeStep);
-    //     net3.addComponent(new Battery("Bat", batteryVoltage, p, n));
-    //     net3.addComponent(new Resistor("R1", 150, p, l));
-    //     net3.addComponent(new Resistor("R2", 50, p, r));
-    //     net3.addComponent(new Capacitor("C3", 1.0, r, l));
-    //     net3.addComponent(new Resistor("R4", 300, l, n));
-    //     net3.addComponent(new Capacitor("C5", 0.75, r, n));
-    //     net3.printHeader();
-    //     net3.simulate();
-    // }
+    {
+        Connection p{0.0}, l{0.0}, r{0.0}, n{0.0};
+        Circuit net2(iterations, printLines, timeStep);
+        net2.addComponent(new Battery("Bat", batteryVoltage, p, n));
+        net2.addComponent(new Resistor("R1", 150, p, l));
+        net2.addComponent(new Resistor("R2", 50, p, r));
+        net2.addComponent(new Resistor("R3", 100, r, l));
+        net2.addComponent(new Resistor("R4", 300, l, n));
+        net2.addComponent(new Resistor("R5", 250, r, n));
+        net2.printHeader();
+        net2.simulate();
+    }
+    {
+        Connection p{0.0}, l{0.0}, r{0.0}, n{0.0};
+        Circuit net3(iterations, printLines, timeStep);
+        net3.addComponent(new Battery("Bat", batteryVoltage, p, n));
+        net3.addComponent(new Resistor("R1", 150, p, l));
+        net3.addComponent(new Resistor("R2", 50, p, r));
+        net3.addComponent(new Capacitor("C3", 1.0, r, l));
+        net3.addComponent(new Resistor("R4", 300, l, n));
+        net3.addComponent(new Capacitor("C5", 0.75, r, n));
+        net3.printHeader();
+        net3.simulate();
+    }
 
     return 0;
 }

@@ -1,17 +1,16 @@
 #include "Components.h"
 Resistor::Resistor(const std::string &name, double resistance, Connection &p, Connection &n) : Component(name, p, n), resistance(resistance)
 {
-    // voltage = p - n;
 }
 
 void Resistor::simulate(double timeStep)
 {
 
-    // double charge{((positive - negative) / resistance) * timeStep};
+    double charge{((positive - negative) / resistance) * timeStep};
 
-    // positive -= charge;
+    positive -= charge;
 
-    // negative += charge;
+    negative += charge;
 }
 
 double Resistor::getVoltage() const
