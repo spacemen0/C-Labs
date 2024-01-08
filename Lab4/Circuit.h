@@ -5,20 +5,14 @@
 #include <iomanip>
 #include "Components.h"
 
-// TODO: Complementary work needed: deallocate_components should be the
-// destructor of the Circuit class.
-//
-// TODO: Complementary work needed: Declare member functions not changing  
-// the state of the object as constant. 
 class Circuit
 {
 public:
-    Circuit();
     Circuit(int iterations, int printInterval, double timeStep);
+    ~Circuit();
     void addComponent(Component *c);
-    void simulate();
-    void printHeader();
-    void deallocate_components();
+    void simulate() const;
+    void printHeader() const;
 
 private:
     std::vector<Component *> components;

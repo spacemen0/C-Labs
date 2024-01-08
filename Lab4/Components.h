@@ -1,15 +1,11 @@
 #ifndef COMPONENTS_H
 #define COMPONENTS_H
 #include <string>
-#include "Connection.h"
 
-// TODO: Complementary work needed: Don’t keep unnecessary data members.
-// (voltage, current)
-//
+using Connection = double;
 class Component
 {
 public:
-    Component();
     Component(const std::string &name, Connection &p, Connection &n);
 
     virtual ~Component() = default;
@@ -17,14 +13,12 @@ public:
     virtual void simulate(double timeStep) = 0;
     virtual double getVoltage() const = 0;
     virtual double getCurrent() const = 0;
-    std::string getName() const ;
+    std::string getName() const;
 
 protected:
     std::string name;
     Connection &positive;
     Connection &negative;
-    double voltage;
-    double current;
 };
 
 class Battery : public Component

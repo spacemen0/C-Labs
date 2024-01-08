@@ -1,29 +1,26 @@
 #include "Components.h"
 
-// TODO: Complementary work needed: Use member initializer lists instead of
-// assigning initial values inside the constructor.
-//
-Capacitor::Capacitor(const std::string &name, double capacitance, Connection &p, Connection &n) : Component(name, p, n), capacitance(capacitance)
+Capacitor::Capacitor(const std::string &name, double capacitance, Connection &p, Connection &n)
+    : Component(name, p, n), capacitance(capacitance), storedCharge(0.0)
 {
-    storedCharge = 0.0;
-    voltage = p.voltage - n.voltage;
+    // voltage = p - n;
 }
 
 void Capacitor::simulate(double timeStep)
 {
-    voltage = positive.voltage - negative.voltage;
-    double charge = capacitance * ((voltage) - (storedCharge)) * timeStep;
-    positive.voltage -= charge;
-    negative.voltage += charge;
+    // voltage = ;
+    double charge{capacitance * ((positive - negative) - (storedCharge)) * timeStep};
+    positive -= charge;
+    negative += charge;
     storedCharge += charge;
 }
 
 double Capacitor::getVoltage() const
 {
-    return voltage;
+    return positive - negative;
 }
 
 double Capacitor::getCurrent() const
 {
-    return capacitance * (voltage - storedCharge);
+    return capacitance * ((positive - negative) - storedCharge);
 }

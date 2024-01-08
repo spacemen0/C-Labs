@@ -1,8 +1,10 @@
 #include "Circuit.h"
 
-Circuit::Circuit() : iterations(0), printInterval(0), timeStep(0)
-{
-}
+// TODO: Complementary work needed: Break long lines (more than 100 characters)
+// into multiple lines.
+//
+// TODO: Complementary work needed: Use '{...}' instead of '=' to initialize variables.
+//
 
 Circuit::Circuit(int iterations, int printInterval, double timeStep) : iterations(iterations), printInterval(printInterval), timeStep(timeStep)
 {
@@ -13,7 +15,7 @@ void Circuit::addComponent(Component *c)
     components.push_back(c);
 }
 
-void Circuit::simulate()
+void Circuit::simulate() const
 {
     for (int i{1}; i <= iterations; i++)
 
@@ -29,7 +31,8 @@ void Circuit::simulate()
 
             {
 
-                std::cout << std::setw(8) << std::fixed << std::setprecision(2) << component->getVoltage() << std::setw(8) << component->getCurrent();
+                std::cout << std::setw(8) << std::fixed << std::setprecision(2)
+                          << component->getVoltage() << std::setw(8) << component->getCurrent();
             }
         }
 
@@ -42,7 +45,7 @@ void Circuit::simulate()
     }
 }
 
-void Circuit::printHeader()
+void Circuit::printHeader() const
 {
     for (Component *component : components)
 
@@ -53,7 +56,7 @@ void Circuit::printHeader()
 
     std::cout << std::endl;
 
-    for (Component *component : components)
+    for (int i{0}; i < static_cast<int>(components.size()); i++)
 
     {
 
@@ -63,7 +66,7 @@ void Circuit::printHeader()
     std::cout << std::endl;
 }
 
-void Circuit::deallocate_components()
+Circuit::~Circuit()
 {
     for (Component *component : components)
     {

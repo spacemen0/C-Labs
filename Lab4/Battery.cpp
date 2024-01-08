@@ -1,24 +1,25 @@
 #include "Components.h"
 Battery::Battery(const std::string &name, double batteryVoltage, Connection &p, Connection &n) : Component(name, p, n), batteryVoltage(batteryVoltage)
 {
-    
 }
 
 void Battery::simulate(double timeStep)
 {
-    positive.voltage = batteryVoltage;
 
-    negative.voltage = 0;
+    (void)timeStep;
+    positive = batteryVoltage;
+    negative = 0;
 
-    voltage = batteryVoltage;
+    // voltage = batteryVoltage;
 }
 
 double Battery::getVoltage() const
 {
-    return voltage;
+    return batteryVoltage;
 }
 
 double Battery::getCurrent() const
 {
-    return current;
+    // return current;
+    return 0;
 }
